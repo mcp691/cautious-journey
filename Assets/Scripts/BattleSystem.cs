@@ -97,6 +97,11 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        // regulate player health does not exceed maximum
+        if (playerData.playerCurrentHP >= playerData.playerMaxHP)
+        {
+            playerData.playerCurrentHP = playerData.playerMaxHP;
+        }
         dialogueText.text = "Choose an action...";
     }
 
@@ -147,6 +152,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         playerHUD.SetHP(playerData.playerCurrentHP + playerData.healingSpells[0].healPower);
+        playerData.Heal(playerData.healingSpells[0].healPower);
 
         yield return new WaitForSeconds(1f);
 
@@ -179,6 +185,12 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
+        // regulate player health does not exceed maximum
+        if (playerData.playerCurrentHP >= playerData.playerMaxHP)
+        {
+            playerData.playerCurrentHP = playerData.playerMaxHP;
+        }
+
         dialogueText.text = enemyData.enemyName + " attacks " + playerData.playerName + " for " + enemyData.enemyAttack + " damage!";
 
         yield return new WaitForSeconds(1f);
@@ -237,6 +249,7 @@ public class BattleSystem : MonoBehaviour
             {
                 playerData.LevelUp();
                 dialogueText.text = playerData.playerName + " is now level " + playerData.playerLevel + "!";
+                playerHUD.SetPlayerHUD(playerData);
                 yield return new WaitForSeconds(2f);
             }
 

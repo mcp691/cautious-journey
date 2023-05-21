@@ -78,4 +78,16 @@ public class PlayerCharData : ScriptableObject
             return false;
     }
 
+    public int Heal(int healBy)
+    {
+        playerCurrentHP += healBy;
+        if (playerCurrentHP >= playerMaxHP)
+        {
+            return playerMaxHP;
+        } else
+        {
+            return playerCurrentHP;
+        }
+    }
+
 }

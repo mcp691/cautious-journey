@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4036742399955970669, guid: a3d17da96f1e4014d9f4a665d2ea17b2, type: 3}
   id: 0
+  index: 0
   description: A simple healing spell for scrapes and bruises. Every new adventurer
     should know it.
   castExp: 1
   minLevel: 1
   castCost: 5
   baseHealPower: 1
-  healPower: 1
-  learned: 1
+  healPower: 3
+  known: 1

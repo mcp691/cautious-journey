@@ -367,7 +367,6 @@ GameObject:
   - component: {fileID: 3532573076201912121}
   - component: {fileID: 3532573076201912119}
   - component: {fileID: 3532573076201912120}
-  - component: {fileID: 3532573076201912118}
   m_Layer: 5
   m_Name: Healing Magic Panel
   m_TagString: Untagged
@@ -386,8 +385,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3532573077392595728}
   - {fileID: 3532573077044320321}
+  - {fileID: 3532573077392595728}
   m_Father: {fileID: 3532573076148698881}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -434,24 +433,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3532573076201912118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3532573076201912122}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6baf8bc160593d743a19d5a51719b271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knownSpells: {fileID: 11400000, guid: 87af0e29ffe421a47931c6d14e48892c, type: 2}
-  X_START: -300
-  Y_START: 55
-  X_SPACE_BETWEEN_ITEM: 115
-  NUMBER_OF_COLUMN: 2
-  Y_SPACE_BETWEEN_ITEMS: 175
 --- !u!1 &3532573076208264070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,7 +1316,7 @@ RectTransform:
   m_Children:
   - {fileID: 3532573076868354746}
   m_Father: {fileID: 3532573076201912121}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2160,7 +2141,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3532573076201912121}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
