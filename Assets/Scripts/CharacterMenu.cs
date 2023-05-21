@@ -1,3 +1,6 @@
+// Script to display the Character menu which shows the player character's
+// stats such as Health, Attack, Speed, etc.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

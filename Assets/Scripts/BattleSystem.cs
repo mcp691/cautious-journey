@@ -63,19 +63,24 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
+
+        // initialize player data
         playerData.Initialize();
         GameObject playerGO = Instantiate(playerData.playerObject, playerBattlePlatform);
         
+        // initialize enemy data
         enemyData.Initialize();
         GameObject enemyGO = Instantiate(enemyData.enemyObject, enemyBattlePlatform);
 
         dialogueText.text = "A " + enemyData.enemyName + " charges at you!";
 
+        // initialize player and enemy HUDs
         playerHUD.SetPlayerHUD(playerData);
         enemyHUD.SetEnemyHUD(enemyData);
 
         yield return new WaitForSeconds(2f);
 
+        // check player speed with enemy speed to determine who goes first
         if (playerData.playerSpeed > enemyData.enemySpeed)
         {
             state = BattleState.PLAYERTURN;
@@ -97,51 +102,69 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
+        // when player selects action, it becomes the enemy's turn
         state = BattleState.ENEMYTURN;
-        dialogueText.text = enemyData.enemyName + " is hit for " + playerData.playerAttack + " damage!";
 
+        dialogueText.text = enemyData.enemyName + " is hit for " + playerData.playerAttack + " damage!";
         yield return new WaitForSeconds(1f);
 
+        // isDead is holding boolean value every turn to check if enemy health is <= 0
         bool isDead = enemyData.TakeDamage(playerData.playerAttack);
 
         enemyHUD.SetHP(enemyData.enemyCurrentHP);
 
         yield return new WaitForSeconds(1f);
 
+        // check if isDead is true or false.
+        // if true, player wins, if false, it becomes enemy turn
         if (isDead)
         {
             state = BattleState.WON;
             StartCoroutine(EndBattle());
         } else
         {
-            state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
     }
 
     IEnumerator PlayerCastSpell()
     {
+        // TODO
+        // make this work for all schools of magic, not just healing
+
+        // when player selects action, it becomes the enemy's turn
         state = BattleState.ENEMYTURN;
+
         CloseHealMagicMenu();
         CloseMagicMenu();
-        Debug.Log("HELLO");
 
-        yield return new WaitForSeconds(1f);
+        // TODO
+        // needs to heal player with the spell that they selected, not the spell indexed at 0
+        // from player's known spells array
 
         dialogueText.text = playerData.playerName + " heals for " + playerData.healingSpells[0].healPower + " health!";
 
         yield return new WaitForSeconds(1f);
 
+        playerHUD.SetHP(playerData.playerCurrentHP + playerData.healingSpells[0].healPower);
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(EnemyTurn());
+
     }
 
     IEnumerator PlayerFlee()
     {
+        // when player selects action, it becomes the enemy's turn
         state = BattleState.ENEMYTURN;
         dialogueText.text = playerData.playerName + " attempts to flee!";
 
+        // set probability of player being able to escape from enemy
         prob = playerData.playerSpeed / (enemyData.enemySpeed - 1);
         yield return new WaitForSeconds(2f);
 
+        // RNG for escaping encounter based on player and enemy speed
         if (Random.Range(0f, 1f) <= prob)
         {
             state = BattleState.FLEE;
@@ -160,18 +183,23 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        // isDead is holding boolean value every turn to check if player health is <= 0
         bool isDead = playerData.TakeDamage(enemyData.enemyAttack);
 
         playerHUD.SetHP(playerData.playerCurrentHP);
 
         yield return new WaitForSeconds(1f);
 
+        // check if isDead is true or false.
+        // if true, enemy wins, if false, it becomes player's turn
         if (isDead)
         {
             state = BattleState.LOST;
             StartCoroutine(EndBattle());
         } else
         {
+            // player turn state needs to be set at the end to prevent
+            // player from interrupting dialogue
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
@@ -182,6 +210,7 @@ public class BattleSystem : MonoBehaviour
 
         if (state == BattleState.WON)
         {
+            // init expGained variable to 0
             int expGained = 0;
             
             // if player level is 1, then this divides by zero
@@ -197,8 +226,13 @@ public class BattleSystem : MonoBehaviour
             dialogueText.text = playerData.playerName + " is victorious!";
             yield return new WaitForSeconds(2f);
             dialogueText.text = playerData.playerName + " gains " + expGained + " experience.";
+
+            // add expGained the the amount of total playerExp
             playerData.playerExp += expGained;
+
             yield return new WaitForSeconds(2f);
+
+            // checks if player has enough exp to level up based on playerExp and playerExpNeeded
             if (playerData.CanLevelUp(playerData.playerExpNeeded, playerData.playerExp))
             {
                 playerData.LevelUp();
@@ -220,6 +254,7 @@ public class BattleSystem : MonoBehaviour
         SceneManager.UnloadSceneAsync("Battle");
     }
 
+    // Coroutine Functions
     public void OnAttackButton()
     {
         if (state != BattleState.PLAYERTURN)
@@ -243,6 +278,8 @@ public class BattleSystem : MonoBehaviour
         
         StartCoroutine(PlayerFlee());
     }
+
+    // UI Functions
 
     public void OpenMagicMenu()
     {

@@ -1,3 +1,5 @@
+// Controls enemy movement in the overworld.
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,7 +52,10 @@ public class EnemyMovement : MonoBehaviour
     bool DetectPlayer()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), 3f);
+        
+        // draw raycast for debugging
         Debug.DrawRay(transform.position, (player.transform.position - transform.position), Color.green);
+        
         if (hit)
             return true;
         else
