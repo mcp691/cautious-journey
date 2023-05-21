@@ -1,1 +1,9 @@
+Logs/*
+Temp/
+Library/Artifacts/
+Library/StateCache
+Library/ArtifactDB
 Library/PackageCache/
+Library/EditorInstance.json
+Library/SpriteAtlasDatabase.asset
+Library/SceneVisibilityState.asset
