@@ -35,6 +35,9 @@ public class PlayerCharData : ScriptableObject
     public int playerAttack;
     public float playerSpeed;
 
+    [Header("Inventory")]
+    public InventoryObject inventory;
+
     public void Initialize()
     {
         playerAttack = Mathf.FloorToInt(playerBaseAttack * playerLevel);
@@ -48,7 +51,8 @@ public class PlayerCharData : ScriptableObject
         if (currentExp >= expNeeded) 
         {
             return true;
-        } else
+        }
+        else
         {
             return false;
         }
@@ -84,10 +88,23 @@ public class PlayerCharData : ScriptableObject
         if (playerCurrentHP >= playerMaxHP)
         {
             return playerMaxHP;
-        } else
+        }
+        else
         {
             return playerCurrentHP;
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        playerLevel = 1;
+        playerExp = 0;
+        playerExpNeeded = 0;
+        playerMaxHP = 10;
+        playerCurrentHP = 10;
+        playerAttack = 2;
+        playerSpeed = 2;
+        inventory.Container.Clear();
     }
 
 }

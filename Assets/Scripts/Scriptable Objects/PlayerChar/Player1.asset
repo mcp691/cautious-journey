@@ -32,3 +32,4 @@ MonoBehaviour:
   playerCurrentHP: 10
   playerAttack: 2
   playerSpeed: 2
+  inventory: {fileID: 11400000, guid: f36a34f328bb80446a526cc2525db306, type: 2}

@@ -11,11 +11,15 @@ public class PlayerMovement : MonoBehaviour
     public GameObject sc;
     public SceneChanger sceneChanger;
     public Animator animator;
+    public PlayerCharData playerChar;
 
     // public RandomEncounterController encounter;
 
     public PauseMenu pause;
     Vector2 movement;
+
+    [Header("Inventory")]
+    public InventoryObject inventory;
     
     void Start()
     {
@@ -72,5 +76,15 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate() {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        var item = other.GetComponent<Item>();
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);
+            Destroy(other.gameObject);
+        }
     }
 }

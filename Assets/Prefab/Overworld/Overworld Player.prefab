@@ -122,9 +122,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.75
   rb: {fileID: 1876658661446164715}
+  sc: {fileID: 0}
   sceneChanger: {fileID: 0}
   animator: {fileID: 1876658661446164724}
   pause: {fileID: 0}
+  inventory: {fileID: 11400000, guid: f36a34f328bb80446a526cc2525db306, type: 2}
 --- !u!95 &1876658661446164724
 Animator:
   serializedVersion: 3
