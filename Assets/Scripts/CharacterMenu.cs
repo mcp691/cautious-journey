@@ -39,11 +39,11 @@ public class CharacterMenu : MonoBehaviour
         attackText.text = "Atk: " + data.playerAttack;
         speedText.text = "Spd: " + data.playerSpeed;
 
-        if (Input.GetKeyDown("c") && charCanvas.GetComponent<Canvas>().enabled == true ||
+        if (Input.GetKeyDown("tab") && charCanvas.GetComponent<Canvas>().enabled == true ||
             Input.GetKeyDown("escape") && charCanvas.GetComponent<Canvas>().enabled == true)
         {
             Unpause();
-        } else if (Input.GetKeyDown("c") && charCanvas.GetComponent<Canvas>().enabled == false && pause.isPaused == false && !sceneChanger.inBattle)
+        } else if (Input.GetKeyDown("tab") && charCanvas.GetComponent<Canvas>().enabled == false && pause.isPaused == false && !sceneChanger.inBattle)
         {
             Pause();
         }

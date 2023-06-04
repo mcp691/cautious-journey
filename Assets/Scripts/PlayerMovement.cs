@@ -30,6 +30,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            inventory.Save();
+        }
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+            inventory.Load();
+        }
+        
         if (sceneChanger.inBattle)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePosition;
